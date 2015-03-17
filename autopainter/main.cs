@@ -21,5 +21,15 @@ namespace autopainter
 
             Application.Exit();
         }
+
+        private void butFind_Click(object sender, EventArgs e)
+        {
+            TQueryData query_data;
+
+            // Get data from text fields
+            query_data.Manufacturer = Manufactur.Text;
+            query_data.ColorCode = CCode.Text;
+            query_data.ColorName = CName.Text;
+        }
     }
 }

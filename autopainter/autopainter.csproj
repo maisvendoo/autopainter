@@ -36,6 +36,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTables.cs" />
+    <Compile Include="DBaccess.cs" />
+    <Compile Include="QueryData.cs" />
     <Compile Include="main.cs">
       <SubType>Form</SubType>
     </Compile>

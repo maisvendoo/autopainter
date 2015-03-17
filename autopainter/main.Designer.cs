@@ -29,13 +29,18 @@ namespace autopainter
             this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Colors = new System.Windows.Forms.DataGridView();
             this.RefColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Manufactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCode = new System.Windows.Forms.TextBox();
             this.butFind = new System.Windows.Forms.Button();
+            this.CName = new System.Windows.Forms.TextBox();
+            this.Manufactur = new System.Windows.Forms.TextBox();
+            this.ManLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Colors)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +66,7 @@ namespace autopainter
             // exitItem
             // 
             this.exitItem.Name = "exitItem";
-            this.exitItem.Size = new System.Drawing.Size(152, 22);
+            this.exitItem.Size = new System.Drawing.Size(103, 22);
             this.exitItem.Text = "Exit";
             this.exitItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -70,7 +75,7 @@ namespace autopainter
             this.Colors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Colors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RefColor,
-            this.Manufactor,
+            this.Manufacturer,
             this.ColorCode,
             this.ColorName,
             this.ColorGroup,
@@ -86,11 +91,11 @@ namespace autopainter
             this.RefColor.Name = "RefColor";
             this.RefColor.ReadOnly = true;
             // 
-            // Manufactor
+            // Manufacturer
             // 
-            this.Manufactor.HeaderText = "Manufactor";
-            this.Manufactor.Name = "Manufactor";
-            this.Manufactor.ReadOnly = true;
+            this.Manufacturer.HeaderText = "Manufacturer";
+            this.Manufacturer.Name = "Manufacturer";
+            this.Manufacturer.ReadOnly = true;
             // 
             // ColorCode
             // 
@@ -118,25 +123,72 @@ namespace autopainter
             // 
             // CCode
             // 
-            this.CCode.Location = new System.Drawing.Point(365, 119);
+            this.CCode.Location = new System.Drawing.Point(442, 113);
             this.CCode.Name = "CCode";
             this.CCode.Size = new System.Drawing.Size(143, 20);
             this.CCode.TabIndex = 2;
             // 
             // butFind
             // 
-            this.butFind.Location = new System.Drawing.Point(646, 116);
+            this.butFind.Location = new System.Drawing.Point(943, 113);
             this.butFind.Name = "butFind";
             this.butFind.Size = new System.Drawing.Size(75, 23);
             this.butFind.TabIndex = 3;
             this.butFind.Text = "Find";
             this.butFind.UseVisualStyleBackColor = true;
+            this.butFind.Click += new System.EventHandler(this.butFind_Click);
+            // 
+            // CName
+            // 
+            this.CName.Location = new System.Drawing.Point(731, 113);
+            this.CName.Name = "CName";
+            this.CName.Size = new System.Drawing.Size(143, 20);
+            this.CName.TabIndex = 4;
+            // 
+            // Manufactur
+            // 
+            this.Manufactur.Location = new System.Drawing.Point(156, 113);
+            this.Manufactur.Name = "Manufactur";
+            this.Manufactur.Size = new System.Drawing.Size(143, 20);
+            this.Manufactur.TabIndex = 5;
+            // 
+            // ManLabel
+            // 
+            this.ManLabel.AutoSize = true;
+            this.ManLabel.Location = new System.Drawing.Point(80, 116);
+            this.ManLabel.Name = "ManLabel";
+            this.ManLabel.Size = new System.Drawing.Size(70, 13);
+            this.ManLabel.TabIndex = 6;
+            this.ManLabel.Text = "Manufacturer";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(368, 116);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Color Code";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(644, 116);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Color Name";
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ManLabel);
+            this.Controls.Add(this.Manufactur);
+            this.Controls.Add(this.CName);
             this.Controls.Add(this.butFind);
             this.Controls.Add(this.CCode);
             this.Controls.Add(this.Colors);
@@ -156,14 +208,19 @@ namespace autopainter
         private System.Windows.Forms.ToolStripMenuItem fileItem;
         private System.Windows.Forms.ToolStripMenuItem exitItem;
         private System.Windows.Forms.DataGridView Colors;
+        private System.Windows.Forms.TextBox CCode;
+        private System.Windows.Forms.Button butFind;
         private System.Windows.Forms.DataGridViewTextBoxColumn RefColor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Manufactor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Manufacturer;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorGroup;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockCode;
-        private System.Windows.Forms.TextBox CCode;
-        private System.Windows.Forms.Button butFind;       
+        private System.Windows.Forms.TextBox CName;
+        private System.Windows.Forms.TextBox Manufactur;
+        private System.Windows.Forms.Label ManLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;       
     }
 }
 
