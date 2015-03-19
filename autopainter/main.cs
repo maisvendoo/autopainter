@@ -12,6 +12,9 @@ namespace autopainter
     {
         private CDBaccess db;
         private int colors_found = 0;
+        private int formulas_found = 0;
+        private TColorsData[] colors_data;
+        private TFormulasData[] formulas_data;
         
         public main()
         {
@@ -20,8 +23,14 @@ namespace autopainter
             foundColors.Text = "Colors - " + String.Format("{0}", colors_found) + 
                                " record(s) found.";
 
-            // DB object creation and connection
-            db = new CDBaccess();
+            foundFormulas.Text = "Formulas - " + String.Format("{0}", formulas_found) +
+                               " record(s) found.";
+
+            for (int i = Colors.Rows.Count - 1; i > -1; i--)
+                Colors.Rows[i].Selected = false;
+
+                // DB object creation and connection
+                db = new CDBaccess();
 
             int err = db.open("E:", "yatu.mdb", "yatu");
 
@@ -49,7 +58,8 @@ namespace autopainter
             query_data.ColorCode = CCode.Text;
             query_data.ColorName = CName.Text;
 
-            TColorsData[] colors_data = new TColorsData[0];
+            colors_data = null;
+            colors_data = new TColorsData[0];
 
             db.get_colors_data(query_data, ref colors_data);
 
@@ -63,19 +73,69 @@ namespace autopainter
             Colors.Rows.Clear();
 
             // Fill table by data from query results
-            for (int i = 0; i < colors_data.GetLength(0); i++)
+
+            if (colors_data.GetLength(0) > 0)
             {
-                Colors.Rows.Add(colors_data[i].RefColor,
-                                colors_data[i].Manufacturer,
-                                colors_data[i].ColorCode,
-                                colors_data[i].ColorName,
-                                colors_data[i].StockCode);
-            }           
+                for (int i = 0; i < colors_data.GetLength(0); i++)
+                {
+                    Colors.Rows.Add(colors_data[i].RefColor,
+                                    colors_data[i].Manufacturer,
+                                    colors_data[i].ColorCode,
+                                    colors_data[i].ColorName,
+                                    colors_data[i].StockCode);
+                }
+            }
+
+            // Clear rows selection
+            Colors.ClearSelection();
         }
 
         private void main_FormClosing(object sender, FormClosingEventArgs e)
         {
             db.close();
         }
+
+        // Actions by Colors row click
+        private void Colors_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // Select string
+                Colors.Rows[e.RowIndex].Selected = true;
+
+                formulas_data = null;
+                formulas_data = new TFormulasData[0];
+
+                db.get_formulas_data(colors_data[e.RowIndex], ref formulas_data);
+
+                formulas_found = formulas_data.GetLength(0);
+
+                foundFormulas.Text = "Formulas - " + String.Format("{0}", formulas_found) +
+                               " record(s) found.";
+
+                Formulas.Rows.Clear();
+
+                if (formulas_data.GetLength(0) > 0)
+                {
+                    for (int i = 0; i < formulas_data.GetLength(0); i++)
+                    {
+                        Formulas.Rows.Add(formulas_data[i].RefColor,
+                                          formulas_data[i].ColorCode,
+                                          formulas_data[i].Brand,
+                                          formulas_data[i].Coat,
+                                          formulas_data[i].Variant,
+                                          formulas_data[i].Model,
+                                          formulas_data[i].Year,
+                                          formulas_data[i].Source,
+                                          formulas_data[i].CreatedDate,
+                                          formulas_data[i].FormulaCode,
+                                          formulas_data[i].StockCode,
+                                          formulas_data[i].ColorIndex);
+                    }
+                }
+
+                Formulas.ClearSelection();
+            }
+        }       
     }
 }

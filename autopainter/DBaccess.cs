@@ -25,6 +25,7 @@ public class CDBaccess
 
     private const string MODEL_DATA = "ModelColor";
     private const string CAR_FACTORY = "CarFactory";
+    private const string COLOR_SCHEME = "ColorScheme";
     
     /*private string db_path;
     private string db_passwd;
@@ -66,13 +67,17 @@ public class CDBaccess
         connection.Close();
     }
 
+    //
     public void get_colors_data(TQueryData query_data, ref TColorsData[] colors_data)
     {
         string query = "SELECT ";
         string where = " WHERE";
 
         // Create begin of query string
-        query += MODEL_DATA + ".colorId, " + CAR_FACTORY + ".name, " + MODEL_DATA + ".colorName";
+        query += MODEL_DATA + ".colorId, " +
+                 CAR_FACTORY + ".name, " + 
+                 MODEL_DATA + ".colorName, " + 
+                 MODEL_DATA + ".id";
 
         query += " FROM " + MODEL_DATA + ", " + CAR_FACTORY;
 
@@ -134,6 +139,63 @@ public class CDBaccess
                 colors_data[data_count - 1].ColorCode = dr["colorId"].ToString();
                 colors_data[data_count - 1].Manufacturer = dr["name"].ToString();
                 colors_data[data_count - 1].ColorName = dr["colorName"].ToString();
+                colors_data[data_count - 1].modelColorId = dr["id"].ToString();
+            }
+        }
+    }
+
+    //
+    public void get_formulas_data(TColorsData colors_data, ref TFormulasData[] formulas_data)
+    {
+        string query = "SELECT ";
+        string where = " WHERE";
+
+        query += "modelColorId, " +
+                 "year, " +
+                 "stockCode, " +
+                 "formulaCode, " + 
+                 "variant, " +
+                 "brand, " + 
+                 "coat, " + 
+                 "model, " + 
+                 "source, " + 
+                 "date, " + 
+                 "colorindex";
+
+        query += " FROM " + COLOR_SCHEME;
+
+        where += String.Format(" modelColorId = \'{0}\' ", colors_data.modelColorId);
+
+        query += where;
+
+        OleDbCommand command = new OleDbCommand();
+
+        command.Connection = connection;
+        command.CommandText = query;
+
+        OleDbDataReader dr = command.ExecuteReader();
+
+        int formulas_count = 0;
+
+        if (dr.HasRows)
+        {
+            while (dr.Read())
+            {
+                formulas_count++;
+
+                Array.Resize(ref formulas_data, formulas_count);
+
+                formulas_data[formulas_count - 1].ColorCode = colors_data.ColorCode;
+                formulas_data[formulas_count - 1].Brand = dr["brand"].ToString();
+                formulas_data[formulas_count - 1].Coat = dr["coat"].ToString();
+                formulas_data[formulas_count - 1].Variant = dr["variant"].ToString();
+                formulas_data[formulas_count - 1].Model = dr["model"].ToString();
+                formulas_data[formulas_count - 1].Year = dr["year"].ToString();
+                formulas_data[formulas_count - 1].Source = dr["source"].ToString();
+                formulas_data[formulas_count - 1].CreatedDate = dr["date"].ToString();
+                formulas_data[formulas_count - 1].FormulaCode = dr["formulaCode"].ToString();
+                formulas_data[formulas_count - 1].StockCode = dr["stockCode"].ToString();
+                formulas_data[formulas_count - 1].ColorIndex = dr["colorindex"].ToString();
             }
         }
     }
