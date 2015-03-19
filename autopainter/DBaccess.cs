@@ -15,19 +15,20 @@ public class CDBaccess
     // Constructor
     public CDBaccess()
     {
-        this.db_path = "E:\\";
-        this.db_filename = "yatu.mdb";
-        this.db_passwd = "yatu";
+        //this.db_path = "E:\\";
+        //this.db_filename = "yatu.mdb";
+        //this.db_passwd = "yatu";
         this.db_provider = "Microsoft.Jet.OLEDB.4.0";
 
         connection = new OleDbConnection();
     }
 
     private const string MODEL_DATA = "ModelColor";
+    private const string CAR_FACTORY = "CarFactory";
     
-    private string db_path;
+    /*private string db_path;
     private string db_passwd;
-    private string db_filename;
+    private string db_filename;*/
 
     private string db_provider;
 
@@ -67,15 +68,22 @@ public class CDBaccess
 
     public void get_colors_data(TQueryData query_data, ref TColorsData[] colors_data)
     {
-        for (int i = 0; i < 10; i++)
-        {
-            Array.Resize(ref colors_data, i+1);
+        string query = "SELECT ";
 
-            colors_data[i].ColorCode = "300";
-            colors_data[i].Manufacturer = "BMW";
-            colors_data[i].ColorName = "BLUE SHIT";
-            colors_data[i].RefColor = "";
-            colors_data[i].StockCode = "";
+        query += MODEL_DATA + ".colorId";
+
+        query += " FROM " + MODEL_DATA;
+
+        OleDbCommand command = new OleDbCommand();
+
+        command.Connection = connection;
+        command.CommandText = query;
+
+        OleDbDataReader dr = command.ExecuteReader();
+
+        if (dr.HasRows)
+        {
+
         }
     }
 }
