@@ -11,10 +11,14 @@ namespace autopainter
     public partial class main : Form
     {
         private CDBaccess db;
+        private int colors_found = 0;
         
         public main()
         {
             InitializeComponent();
+
+            foundColors.Text = "Colors - " + String.Format("{0}", colors_found) + 
+                               " record(s) found.";
 
             // DB object creation and connection
             db = new CDBaccess();
@@ -33,6 +37,9 @@ namespace autopainter
             Application.Exit();
         }
 
+        //-----------------------------------------------------------
+        //  Find colors in DB
+        //-----------------------------------------------------------
         private void butFind_Click(object sender, EventArgs e)
         {
             TQueryData query_data;
@@ -45,6 +52,12 @@ namespace autopainter
             TColorsData[] colors_data = new TColorsData[0];
 
             db.get_colors_data(query_data, ref colors_data);
+
+            // Found colors count output
+            colors_found = colors_data.GetLength(0);
+
+            foundColors.Text = "Colors - " + String.Format("{0}", colors_found) +
+                               " record(s) found.";
 
             // Clean all rows in table
             Colors.Rows.Clear();

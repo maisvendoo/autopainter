@@ -71,38 +71,46 @@ public class CDBaccess
         string query = "SELECT ";
         string where = " WHERE";
 
+        // Create begin of query string
         query += MODEL_DATA + ".colorId, " + CAR_FACTORY + ".name, " + MODEL_DATA + ".colorName";
 
         query += " FROM " + MODEL_DATA + ", " + CAR_FACTORY;
 
+        // Create query conditions by text field's values
+
+        // Check color code field
         if (query_data.ColorCode != "")
         {
-            where += String.Format(" ModelColor.colorId = \'{0}\'", query_data.ColorCode);
+            where += String.Format(" {1}.colorId = \'{0}\'", query_data.ColorCode, MODEL_DATA);
         }
         else
         {
-            where += " ModelColor.colorId LIKE \'%\'";
+            where += String.Format(" {0}.colorId LIKE \'%\'", MODEL_DATA);
         }
 
+        // Check manufacturer field
         if (query_data.Manufacturer != "")
         {
-            where += String.Format(" AND CarFactory.name = \'{0}\'", query_data.Manufacturer);
+            where += String.Format(" AND {1}.name = \'{0}\'", query_data.Manufacturer, CAR_FACTORY);
         }
         else
         {
-            where += " AND CarFactory.name LIKE \'%\'";
+            where += String.Format(" AND {0}.name LIKE \'%\'", CAR_FACTORY);
         }
 
+        // Check color name field
         if (query_data.ColorName != "")
         {
-            where += String.Format(" AND ModelColor.colorName = \'{0}\'", query_data.ColorName);
+            where += String.Format(" AND {1}.colorName = \'{0}\'", query_data.ColorName, MODEL_DATA);
         }
         else
         {
-            where += " AND ModelColor.colorName LIKE \'%\'";
+            where += String.Format(" AND {0}.colorName LIKE \'%\'", MODEL_DATA);
         }
 
-        where += " AND CarFactory.id = ModelColor.carFatoryId";
+        where += String.Format(" AND {0}.id = {1}.carFatoryId", CAR_FACTORY, MODEL_DATA);
+
+        where += String.Format(" ORDER BY {0}.colorId", MODEL_DATA);
 
         query += where;
 

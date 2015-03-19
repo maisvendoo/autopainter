@@ -35,6 +35,7 @@ namespace autopainter
             this.ManLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.foundColors = new System.Windows.Forms.Label();
             this.RefColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,9 +83,9 @@ namespace autopainter
             this.ColorGroup,
             this.StockCode,
             this.subscribe});
-            this.Colors.Location = new System.Drawing.Point(29, 155);
+            this.Colors.Location = new System.Drawing.Point(29, 200);
             this.Colors.Name = "Colors";
-            this.Colors.Size = new System.Drawing.Size(989, 150);
+            this.Colors.Size = new System.Drawing.Size(989, 192);
             this.Colors.TabIndex = 1;
             // 
             // CCode
@@ -145,6 +146,15 @@ namespace autopainter
             this.label2.TabIndex = 8;
             this.label2.Text = "Color Name";
             // 
+            // foundColors
+            // 
+            this.foundColors.AutoSize = true;
+            this.foundColors.Location = new System.Drawing.Point(26, 175);
+            this.foundColors.Name = "foundColors";
+            this.foundColors.Size = new System.Drawing.Size(65, 13);
+            this.foundColors.TabIndex = 9;
+            this.foundColors.Text = "found colors";
+            // 
             // RefColor
             // 
             this.RefColor.HeaderText = "RefColor";
@@ -153,18 +163,21 @@ namespace autopainter
             // 
             // Manufacturer
             // 
+            this.Manufacturer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Manufacturer.HeaderText = "Manufacturer";
             this.Manufacturer.Name = "Manufacturer";
             this.Manufacturer.ReadOnly = true;
             // 
             // ColorCode
             // 
+            this.ColorCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ColorCode.HeaderText = "ColorCode";
             this.ColorCode.Name = "ColorCode";
             this.ColorCode.ReadOnly = true;
             // 
             // ColorName
             // 
+            this.ColorName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ColorName.HeaderText = "ColorName";
             this.ColorName.Name = "ColorName";
             this.ColorName.ReadOnly = true;
@@ -192,6 +205,7 @@ namespace autopainter
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 753);
+            this.Controls.Add(this.foundColors);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ManLabel);
@@ -224,6 +238,7 @@ namespace autopainter
         private System.Windows.Forms.Label ManLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label foundColors;
         private System.Windows.Forms.DataGridViewTextBoxColumn RefColor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Manufacturer;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorCode;
