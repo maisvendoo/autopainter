@@ -69,10 +69,42 @@ public class CDBaccess
     public void get_colors_data(TQueryData query_data, ref TColorsData[] colors_data)
     {
         string query = "SELECT ";
+        string where = " WHERE";
 
-        query += MODEL_DATA + ".colorId";
+        query += MODEL_DATA + ".colorId, " + CAR_FACTORY + ".name, " + MODEL_DATA + ".colorName";
 
-        query += " FROM " + MODEL_DATA;
+        query += " FROM " + MODEL_DATA + ", " + CAR_FACTORY;
+
+        if (query_data.ColorCode != "")
+        {
+            where += String.Format(" ModelColor.colorId = \'{0}\'", query_data.ColorCode);
+        }
+        else
+        {
+            where += " ModelColor.colorId LIKE \'%\'";
+        }
+
+        if (query_data.Manufacturer != "")
+        {
+            where += String.Format(" AND CarFactory.name = \'{0}\'", query_data.Manufacturer);
+        }
+        else
+        {
+            where += " AND CarFactory.name LIKE \'%\'";
+        }
+
+        if (query_data.ColorName != "")
+        {
+            where += String.Format(" AND ModelColor.colorName = \'{0}\'", query_data.ColorName);
+        }
+        else
+        {
+            where += " AND ModelColor.colorName LIKE \'%\'";
+        }
+
+        where += " AND CarFactory.id = ModelColor.carFatoryId";
+
+        query += where;
 
         OleDbCommand command = new OleDbCommand();
 
@@ -81,9 +113,20 @@ public class CDBaccess
 
         OleDbDataReader dr = command.ExecuteReader();
 
+        int data_count = 0;
+
         if (dr.HasRows)
         {
+            while (dr.Read())
+            {
+                data_count++;
 
+                Array.Resize(ref colors_data, data_count);
+
+                colors_data[data_count - 1].ColorCode = dr["colorId"].ToString();
+                colors_data[data_count - 1].Manufacturer = dr["name"].ToString();
+                colors_data[data_count - 1].ColorName = dr["colorName"].ToString();
+            }
         }
     }
 }
