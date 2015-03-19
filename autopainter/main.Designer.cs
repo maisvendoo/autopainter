@@ -28,12 +28,6 @@ namespace autopainter
             this.fileItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Colors = new System.Windows.Forms.DataGridView();
-            this.RefColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCode = new System.Windows.Forms.TextBox();
             this.butFind = new System.Windows.Forms.Button();
             this.CName = new System.Windows.Forms.TextBox();
@@ -41,6 +35,13 @@ namespace autopainter
             this.ManLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.RefColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subscribe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Colors)).BeginInit();
             this.SuspendLayout();
@@ -79,47 +80,12 @@ namespace autopainter
             this.ColorCode,
             this.ColorName,
             this.ColorGroup,
-            this.StockCode});
+            this.StockCode,
+            this.subscribe});
             this.Colors.Location = new System.Drawing.Point(29, 155);
             this.Colors.Name = "Colors";
             this.Colors.Size = new System.Drawing.Size(989, 150);
             this.Colors.TabIndex = 1;
-            // 
-            // RefColor
-            // 
-            this.RefColor.HeaderText = "RefColor";
-            this.RefColor.Name = "RefColor";
-            this.RefColor.ReadOnly = true;
-            // 
-            // Manufacturer
-            // 
-            this.Manufacturer.HeaderText = "Manufacturer";
-            this.Manufacturer.Name = "Manufacturer";
-            this.Manufacturer.ReadOnly = true;
-            // 
-            // ColorCode
-            // 
-            this.ColorCode.HeaderText = "ColorCode";
-            this.ColorCode.Name = "ColorCode";
-            this.ColorCode.ReadOnly = true;
-            // 
-            // ColorName
-            // 
-            this.ColorName.HeaderText = "ColorName";
-            this.ColorName.Name = "ColorName";
-            this.ColorName.ReadOnly = true;
-            // 
-            // ColorGroup
-            // 
-            this.ColorGroup.HeaderText = "ColorGroup";
-            this.ColorGroup.Name = "ColorGroup";
-            this.ColorGroup.ReadOnly = true;
-            // 
-            // StockCode
-            // 
-            this.StockCode.HeaderText = "StockCode";
-            this.StockCode.Name = "StockCode";
-            this.StockCode.ReadOnly = true;
             // 
             // CCode
             // 
@@ -179,11 +145,53 @@ namespace autopainter
             this.label2.TabIndex = 8;
             this.label2.Text = "Color Name";
             // 
+            // RefColor
+            // 
+            this.RefColor.HeaderText = "RefColor";
+            this.RefColor.Name = "RefColor";
+            this.RefColor.ReadOnly = true;
+            // 
+            // Manufacturer
+            // 
+            this.Manufacturer.HeaderText = "Manufacturer";
+            this.Manufacturer.Name = "Manufacturer";
+            this.Manufacturer.ReadOnly = true;
+            // 
+            // ColorCode
+            // 
+            this.ColorCode.HeaderText = "ColorCode";
+            this.ColorCode.Name = "ColorCode";
+            this.ColorCode.ReadOnly = true;
+            // 
+            // ColorName
+            // 
+            this.ColorName.HeaderText = "ColorName";
+            this.ColorName.Name = "ColorName";
+            this.ColorName.ReadOnly = true;
+            // 
+            // ColorGroup
+            // 
+            this.ColorGroup.HeaderText = "ColorGroup";
+            this.ColorGroup.Name = "ColorGroup";
+            this.ColorGroup.ReadOnly = true;
+            // 
+            // StockCode
+            // 
+            this.StockCode.HeaderText = "StockCode";
+            this.StockCode.Name = "StockCode";
+            this.StockCode.ReadOnly = true;
+            // 
+            // subscribe
+            // 
+            this.subscribe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.subscribe.HeaderText = "";
+            this.subscribe.Name = "subscribe";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.ClientSize = new System.Drawing.Size(1366, 753);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ManLabel);
@@ -196,6 +204,7 @@ namespace autopainter
             this.MainMenuStrip = this.MainMenu;
             this.Name = "main";
             this.Text = "Auto Painter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_FormClosing);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Colors)).EndInit();
@@ -210,17 +219,18 @@ namespace autopainter
         private System.Windows.Forms.DataGridView Colors;
         private System.Windows.Forms.TextBox CCode;
         private System.Windows.Forms.Button butFind;
+        private System.Windows.Forms.TextBox CName;
+        private System.Windows.Forms.TextBox Manufactur;
+        private System.Windows.Forms.Label ManLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn RefColor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Manufacturer;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorGroup;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockCode;
-        private System.Windows.Forms.TextBox CName;
-        private System.Windows.Forms.TextBox Manufactur;
-        private System.Windows.Forms.Label ManLabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;       
+        private System.Windows.Forms.DataGridViewTextBoxColumn subscribe;       
     }
 }
 

@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="DataTables.cs" />
     <Compile Include="DBaccess.cs" />
+    <Compile Include="MainFormData.cs" />
     <Compile Include="QueryData.cs" />
     <Compile Include="main.cs">
       <SubType>Form</SubType>

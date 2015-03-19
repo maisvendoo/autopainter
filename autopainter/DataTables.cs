@@ -5,7 +5,7 @@
 //
 //-------------------------------------------------------------------
 
-public struct TModelData
+public struct TModelColor
 {
     public string id;
     public string packageId;
@@ -16,4 +16,14 @@ public struct TModelData
     public string colorFamily;
     public string refPhotoPath;
     public string matchModel;
+}
+
+public struct TCarFactory
+{
+    public string id;
+    public string packageId;
+    public string name;
+    public string nbr;
+    public string shortName;
+    public string englishName;
 }
