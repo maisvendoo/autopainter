@@ -65,7 +65,7 @@ public class CDBaccess
         connection.Close();
     }
 
-    public void get_colors_data(string query, ref TColorsData[] colors_data)
+    public void get_colors_data(TQueryData query_data, ref TColorsData[] colors_data)
     {
         for (int i = 0; i < 10; i++)
         {

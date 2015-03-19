@@ -44,9 +44,13 @@ namespace autopainter
 
             TColorsData[] colors_data = new TColorsData[0];
 
-            db.get_colors_data("", ref colors_data);
-                        
-            for (int i = 1; i < colors_data.GetLength(0); i++)
+            db.get_colors_data(query_data, ref colors_data);
+
+            // Clean all rows in table
+            Colors.Rows.Clear();
+
+            // Fill table by data from query results
+            for (int i = 0; i < colors_data.GetLength(0); i++)
             {
                 Colors.Rows.Add(colors_data[i].RefColor,
                                 colors_data[i].Manufacturer,
