@@ -15,21 +15,38 @@ public class CDBaccess
     // Constructor
     public CDBaccess()
     {
-        //this.db_path = "E:\\";
-        //this.db_filename = "yatu.mdb";
-        //this.db_passwd = "yatu";
         this.db_provider = "Microsoft.Jet.OLEDB.4.0";
 
         connection = new OleDbConnection();
     }
 
+    // Tables names
     private const string MODEL_DATA = "ModelColor";
     private const string CAR_FACTORY = "CarFactory";
-    private const string COLOR_SCHEME = "ColorScheme";
+    private const string COLOR_SCHEME = "ColorScheme";   
     
-    /*private string db_path;
-    private string db_passwd;
-    private string db_filename;*/
+    // Fields names MODEL_DATA
+    private const string COLOR_ID = "colorId";
+    private const string COLOR_NAME = "colorName";
+    private const string MOD_ID = "id";
+    private const string CAR_FACTORY_ID = "carFatoryId";
+
+    // Fields names CAR_FACTORY
+    private const string FACTORY_NAME = "name";
+    private const string CAR_ID = "id";
+
+    // Fields names COLOR_SCHEME
+    private const string MODEL_COLOR_ID = "modelColorId";
+    private const string YEAR = "year";
+    private const string STOCK_CODE = "stockCode";
+    private const string FORMULA_CODE = "formulaCode";
+    private const string VARIANT = "variant";
+    private const string BRAND = "brand";
+    private const string COAT = "coat";
+    private const string MODEL = "model";
+    private const string SOURCE = "source";
+    private const string DATE = "date";
+    private const string COLOR_INDEX = "colorindex";
 
     private string db_provider;
 
@@ -74,10 +91,10 @@ public class CDBaccess
         string where = " WHERE";
 
         // Create begin of query string
-        query += MODEL_DATA + ".colorId, " +
-                 CAR_FACTORY + ".name, " + 
-                 MODEL_DATA + ".colorName, " + 
-                 MODEL_DATA + ".id";
+        query += MODEL_DATA + "." + COLOR_ID + ", " +
+                 CAR_FACTORY + "." + FACTORY_NAME + ", " +
+                 MODEL_DATA + "." + COLOR_NAME + ", " +
+                 MODEL_DATA + "." + MOD_ID;
 
         query += " FROM " + MODEL_DATA + ", " + CAR_FACTORY;
 
@@ -86,36 +103,36 @@ public class CDBaccess
         // Check color code field
         if (query_data.ColorCode != "")
         {
-            where += String.Format(" {1}.colorId = \'{0}\'", query_data.ColorCode, MODEL_DATA);
+            where += String.Format(" {1}.{2} = \'{0}\'", query_data.ColorCode, MODEL_DATA, COLOR_ID);
         }
         else
         {
-            where += String.Format(" {0}.colorId LIKE \'%\'", MODEL_DATA);
+            where += String.Format(" {0}.{1} LIKE \'%\'", MODEL_DATA, COLOR_ID);
         }
 
         // Check manufacturer field
         if (query_data.Manufacturer != "")
         {
-            where += String.Format(" AND {1}.name = \'{0}\'", query_data.Manufacturer, CAR_FACTORY);
+            where += String.Format(" AND {1}.{2} = \'{0}\'", query_data.Manufacturer, CAR_FACTORY, FACTORY_NAME);
         }
         else
         {
-            where += String.Format(" AND {0}.name LIKE \'%\'", CAR_FACTORY);
+            where += String.Format(" AND {0}.{1} LIKE \'%\'", CAR_FACTORY, FACTORY_NAME);
         }
 
         // Check color name field
         if (query_data.ColorName != "")
         {
-            where += String.Format(" AND {1}.colorName = \'{0}\'", query_data.ColorName, MODEL_DATA);
+            where += String.Format(" AND {1}.{2} = \'{0}\'", query_data.ColorName, MODEL_DATA, COLOR_NAME);
         }
         else
         {
-            where += String.Format(" AND {0}.colorName LIKE \'%\'", MODEL_DATA);
+            where += String.Format(" AND {0}.{1} LIKE \'%\'", MODEL_DATA, COLOR_NAME);
         }
 
-        where += String.Format(" AND {0}.id = {1}.carFatoryId", CAR_FACTORY, MODEL_DATA);
+        where += String.Format(" AND {0}.{2} = {1}.{3}", CAR_FACTORY, MODEL_DATA, CAR_ID, CAR_FACTORY_ID);
 
-        where += String.Format(" ORDER BY {0}.colorId", MODEL_DATA);
+        where += String.Format(" ORDER BY {0}.{1}", MODEL_DATA, COLOR_ID);
 
         query += where;
 
@@ -136,10 +153,10 @@ public class CDBaccess
 
                 Array.Resize(ref colors_data, data_count);
 
-                colors_data[data_count - 1].ColorCode = dr["colorId"].ToString();
-                colors_data[data_count - 1].Manufacturer = dr["name"].ToString();
-                colors_data[data_count - 1].ColorName = dr["colorName"].ToString();
-                colors_data[data_count - 1].modelColorId = dr["id"].ToString();
+                colors_data[data_count - 1].ColorCode = dr[COLOR_ID].ToString();
+                colors_data[data_count - 1].Manufacturer = dr[FACTORY_NAME].ToString();
+                colors_data[data_count - 1].ColorName = dr[COLOR_NAME].ToString();
+                colors_data[data_count - 1].modelColorId = dr[MOD_ID].ToString();
             }
         }
     }
@@ -149,22 +166,22 @@ public class CDBaccess
     {
         string query = "SELECT ";
         string where = " WHERE";
-
-        query += "modelColorId, " +
-                 "year, " +
-                 "stockCode, " +
-                 "formulaCode, " + 
-                 "variant, " +
-                 "brand, " + 
-                 "coat, " + 
-                 "model, " + 
-                 "source, " + 
-                 "date, " + 
-                 "colorindex";
+        
+        query += MODEL_COLOR_ID + ", " +
+                 YEAR + ", " +
+                 STOCK_CODE + ", " +
+                 FORMULA_CODE + ", " +
+                 VARIANT + ", " +
+                 BRAND + ", " +
+                 COAT + ", " +
+                 MODEL + ", " +
+                 SOURCE + ", " +
+                 DATE + ", " +
+                 COLOR_INDEX;
 
         query += " FROM " + COLOR_SCHEME;
 
-        where += String.Format(" modelColorId = \'{0}\' ", colors_data.modelColorId);
+        where += String.Format(" {1} = \'{0}\' ", colors_data.modelColorId, MODEL_COLOR_ID);
 
         query += where;
 
@@ -186,16 +203,16 @@ public class CDBaccess
                 Array.Resize(ref formulas_data, formulas_count);
 
                 formulas_data[formulas_count - 1].ColorCode = colors_data.ColorCode;
-                formulas_data[formulas_count - 1].Brand = dr["brand"].ToString();
-                formulas_data[formulas_count - 1].Coat = dr["coat"].ToString();
-                formulas_data[formulas_count - 1].Variant = dr["variant"].ToString();
-                formulas_data[formulas_count - 1].Model = dr["model"].ToString();
-                formulas_data[formulas_count - 1].Year = dr["year"].ToString();
-                formulas_data[formulas_count - 1].Source = dr["source"].ToString();
-                formulas_data[formulas_count - 1].CreatedDate = dr["date"].ToString();
-                formulas_data[formulas_count - 1].FormulaCode = dr["formulaCode"].ToString();
-                formulas_data[formulas_count - 1].StockCode = dr["stockCode"].ToString();
-                formulas_data[formulas_count - 1].ColorIndex = dr["colorindex"].ToString();
+                formulas_data[formulas_count - 1].Brand = dr[BRAND].ToString();
+                formulas_data[formulas_count - 1].Coat = dr[COAT].ToString();
+                formulas_data[formulas_count - 1].Variant = dr[VARIANT].ToString();
+                formulas_data[formulas_count - 1].Model = dr[MODEL].ToString();
+                formulas_data[formulas_count - 1].Year = dr[YEAR].ToString();
+                formulas_data[formulas_count - 1].Source = dr[SOURCE].ToString();
+                formulas_data[formulas_count - 1].CreatedDate = dr[DATE].ToString();
+                formulas_data[formulas_count - 1].FormulaCode = dr[FORMULA_CODE].ToString();
+                formulas_data[formulas_count - 1].StockCode = dr[STOCK_CODE].ToString();
+                formulas_data[formulas_count - 1].ColorIndex = dr[COLOR_INDEX].ToString();
             }
         }
     }

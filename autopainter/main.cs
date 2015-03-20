@@ -71,6 +71,7 @@ namespace autopainter
 
             // Clean all rows in table
             Colors.Rows.Clear();
+            Formulas.Rows.Clear();
 
             // Fill table by data from query results
 
