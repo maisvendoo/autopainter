@@ -28,6 +28,13 @@ namespace autopainter
             this.fileItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Colors = new System.Windows.Forms.DataGridView();
+            this.RefColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subscribe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CCode = new System.Windows.Forms.TextBox();
             this.butFind = new System.Windows.Forms.Button();
             this.CName = new System.Windows.Forms.TextBox();
@@ -36,13 +43,6 @@ namespace autopainter
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.foundColors = new System.Windows.Forms.Label();
-            this.RefColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subscribe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Formulas = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,6 +90,9 @@ namespace autopainter
             // Colors
             // 
             this.Colors.AllowUserToAddRows = false;
+            this.Colors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.Colors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Colors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RefColor,
@@ -105,6 +108,51 @@ namespace autopainter
             this.Colors.Size = new System.Drawing.Size(1291, 192);
             this.Colors.TabIndex = 1;
             this.Colors.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Colors_CellMouseClick);
+            // 
+            // RefColor
+            // 
+            this.RefColor.HeaderText = "RefColor";
+            this.RefColor.Name = "RefColor";
+            this.RefColor.ReadOnly = true;
+            // 
+            // Manufacturer
+            // 
+            this.Manufacturer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Manufacturer.HeaderText = "Manufacturer";
+            this.Manufacturer.Name = "Manufacturer";
+            this.Manufacturer.ReadOnly = true;
+            // 
+            // ColorCode
+            // 
+            this.ColorCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColorCode.HeaderText = "ColorCode";
+            this.ColorCode.Name = "ColorCode";
+            this.ColorCode.ReadOnly = true;
+            // 
+            // ColorName
+            // 
+            this.ColorName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColorName.HeaderText = "ColorName";
+            this.ColorName.Name = "ColorName";
+            this.ColorName.ReadOnly = true;
+            // 
+            // ColorGroup
+            // 
+            this.ColorGroup.HeaderText = "ColorGroup";
+            this.ColorGroup.Name = "ColorGroup";
+            this.ColorGroup.ReadOnly = true;
+            // 
+            // StockCode
+            // 
+            this.StockCode.HeaderText = "StockCode";
+            this.StockCode.Name = "StockCode";
+            this.StockCode.ReadOnly = true;
+            // 
+            // subscribe
+            // 
+            this.subscribe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.subscribe.HeaderText = "";
+            this.subscribe.Name = "subscribe";
             // 
             // CCode
             // 
@@ -173,54 +221,12 @@ namespace autopainter
             this.foundColors.TabIndex = 9;
             this.foundColors.Text = "found colors";
             // 
-            // RefColor
-            // 
-            this.RefColor.HeaderText = "RefColor";
-            this.RefColor.Name = "RefColor";
-            this.RefColor.ReadOnly = true;
-            // 
-            // Manufacturer
-            // 
-            this.Manufacturer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Manufacturer.HeaderText = "Manufacturer";
-            this.Manufacturer.Name = "Manufacturer";
-            this.Manufacturer.ReadOnly = true;
-            // 
-            // ColorCode
-            // 
-            this.ColorCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColorCode.HeaderText = "ColorCode";
-            this.ColorCode.Name = "ColorCode";
-            this.ColorCode.ReadOnly = true;
-            // 
-            // ColorName
-            // 
-            this.ColorName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColorName.HeaderText = "ColorName";
-            this.ColorName.Name = "ColorName";
-            this.ColorName.ReadOnly = true;
-            // 
-            // ColorGroup
-            // 
-            this.ColorGroup.HeaderText = "ColorGroup";
-            this.ColorGroup.Name = "ColorGroup";
-            this.ColorGroup.ReadOnly = true;
-            // 
-            // StockCode
-            // 
-            this.StockCode.HeaderText = "StockCode";
-            this.StockCode.Name = "StockCode";
-            this.StockCode.ReadOnly = true;
-            // 
-            // subscribe
-            // 
-            this.subscribe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.subscribe.HeaderText = "";
-            this.subscribe.Name = "subscribe";
-            // 
             // Formulas
             // 
             this.Formulas.AllowUserToAddRows = false;
+            this.Formulas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.Formulas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Formulas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
