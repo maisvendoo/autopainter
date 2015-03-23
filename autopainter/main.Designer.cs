@@ -307,6 +307,8 @@ namespace autopainter
             // 
             // CCode
             // 
+            this.CCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.CCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.CCode.FormattingEnabled = true;
             this.CCode.Location = new System.Drawing.Point(447, 112);
             this.CCode.Name = "CCode";
@@ -315,15 +317,18 @@ namespace autopainter
             // 
             // Manufactur
             // 
+            this.Manufactur.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.Manufactur.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.Manufactur.FormattingEnabled = true;
             this.Manufactur.Location = new System.Drawing.Point(156, 112);
             this.Manufactur.Name = "Manufactur";
             this.Manufactur.Size = new System.Drawing.Size(168, 21);
             this.Manufactur.TabIndex = 13;
-            this.Manufactur.TextUpdate += new System.EventHandler(this.Manufactur_TextUpdate);
             // 
             // CName
             // 
+            this.CName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.CName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.CName.FormattingEnabled = true;
             this.CName.Location = new System.Drawing.Point(712, 112);
             this.CName.Name = "CName";

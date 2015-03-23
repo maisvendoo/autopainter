@@ -221,60 +221,45 @@ public class CDBaccess
         }
     }
 
-    public void get_hint_list(TQueryData query_data, ref string[] hint_list, int field)
+    public void get_hint_list(ref string[] hint_list, int field)
     {
-        string query = "SELECT ";
+        string query = "SELECT DISTINCT ";
         string where = " WHERE";
         string field_name = "";
         string field_idx = "";
+        string table_name = "";
 
         switch (field)
         {
             case FILED_MANUFACTOR:
                 {
-                    field_name = CAR_FACTORY + "." + FACTORY_NAME;
+                    table_name = CAR_FACTORY;
+                    field_name = table_name + "." + FACTORY_NAME;
                     field_idx = FACTORY_NAME;
-
-                    where += String.Format(" {0}.{1} LIKE \'{2}%\'", CAR_FACTORY, FACTORY_NAME, query_data.Manufacturer); 
-
-                    if (query_data.ColorCode != "")
-                    {
-                        where += String.Format(" AND {0}.{1} = {2}", MODEL_DATA, COLOR_ID, query_data.ColorCode);
-                    }
-                    else
-                    {
-                        where += String.Format(" AND {0}.{1} LIKE \'%\'", MODEL_DATA, COLOR_ID);
-                    }
-
-                    if (query_data.ColorName != "")
-                    {
-                        where += String.Format(" AND {0}.{1} = {2}", MODEL_DATA, COLOR_NAME, query_data.ColorName);
-                    }
-                    else
-                    {
-                        where += String.Format(" AND {0}.{1} LIKE \'%\'", MODEL_DATA, COLOR_NAME);
-                    }
-
                     break;
                 }
 
             case FIELD_COLOR_CODE:
                 {
-                    field_name = MODEL_DATA + "." + COLOR_ID;
+                    table_name = MODEL_DATA;
+                    field_name = table_name + "." + COLOR_ID;
+                    field_idx = COLOR_ID;
                     break;
                 }
 
             case FILED_COLOR_NAME:
                 {
-                    field_name = MODEL_DATA + "." + COLOR_NAME;
+                    table_name = MODEL_DATA;
+                    field_name = table_name + "." + COLOR_NAME;
+                    field_idx = COLOR_NAME;
                     break;
                 }
         }
 
         query += field_name;
-        query += " FROM " + MODEL_DATA + ", " + CAR_FACTORY;
+        query += " FROM " + table_name;
 
-        query += where;
+        //query += where;
 
         OleDbCommand command = new OleDbCommand();
 

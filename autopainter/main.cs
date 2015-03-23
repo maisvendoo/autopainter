@@ -38,6 +38,30 @@ namespace autopainter
             {
                 MessageBox.Show("DB opening error");
             }
+
+            // Get data for hints
+            string[] hint_list = new string[0];
+
+            db.get_hint_list(ref hint_list, 0);
+
+            Manufactur.Items.Clear();
+
+            for (int i = 0; i < hint_list.GetLength(0); i++)
+                Manufactur.Items.Add(hint_list[i]);
+
+            db.get_hint_list(ref hint_list, 1);
+
+            CCode.Items.Clear();
+
+            for (int i = 0; i < hint_list.GetLength(0); i++)
+                CCode.Items.Add(hint_list[i]);
+
+            db.get_hint_list(ref hint_list, 2);
+
+            CName.Items.Clear();
+
+            for (int i = 0; i < hint_list.GetLength(0); i++)
+                CName.Items.Add(hint_list[i]);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -139,27 +163,6 @@ namespace autopainter
             }
         }
 
-        private void Manufactur_TextUpdate(object sender, EventArgs e)
-        {
-            /*string[] hint_list = new string[0];
-
-            TQueryData query_data;
-
-            // Get data from text fields
-            query_data.Manufacturer = Manufactur.Text;
-            query_data.ColorCode = CCode.Text;
-            query_data.ColorName = CName.Text;
-
-            db.get_hint_list(query_data, ref hint_list, 0);
-
-            Manufactur.Items.Clear();
-
-            for (int i = 0; i < hint_list.GetLength(0); i++)
-                Manufactur.Items.Add(hint_list[i]);*/
-        }
-
-        
-
-        
+                       
     }
 }
