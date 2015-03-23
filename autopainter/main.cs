@@ -16,6 +16,9 @@ namespace autopainter
         private TColorsData[] colors_data;
         private TFormulasData[] formulas_data;
         
+        //-----------------------------------------------------------
+        //  Main form initialization
+        //-----------------------------------------------------------
         public main()
         {
             InitializeComponent();
@@ -39,6 +42,14 @@ namespace autopainter
                 MessageBox.Show("DB opening error");
             }
 
+            hints_update();
+        }
+
+        //-----------------------------------------------------------
+        //  Update hints data
+        //-----------------------------------------------------------
+        private void hints_update()
+        {
             // Get data for hints
             string[] hint_list = new string[0];
 
@@ -64,6 +75,9 @@ namespace autopainter
                 CName.Items.Add(hint_list[i]);
         }
 
+        //-----------------------------------------------------------
+        //  Exit application
+        //-----------------------------------------------------------
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Here must be functions for correct exit
@@ -98,7 +112,6 @@ namespace autopainter
             Formulas.Rows.Clear();
 
             // Fill table by data from query results
-
             if (colors_data.GetLength(0) > 0)
             {
                 for (int i = 0; i < colors_data.GetLength(0); i++)
@@ -115,31 +128,43 @@ namespace autopainter
             Colors.ClearSelection();
         }
 
-        private void main_FormClosing(object sender, FormClosingEventArgs e)
+        //-----------------------------------------------------------
+        //  Close DB connection befor terminate
+        //-----------------------------------------------------------
+        private void main_FormClosing(object sender, 
+                                      FormClosingEventArgs e)
         {
             db.close();
         }
 
-        // Actions by Colors row click
-        private void Colors_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        //-----------------------------------------------------------
+        //  Actions by Colors row click (left mouse button)
+        //-----------------------------------------------------------
+        private void Colors_CellMouseClick(object sender, 
+                                           DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 // Select string
                 Colors.Rows[e.RowIndex].Selected = true;
 
+                // Clear and realloc formulas data
                 formulas_data = null;
                 formulas_data = new TFormulasData[0];
 
+                // Get formulas from DB
                 db.get_formulas_data(colors_data[e.RowIndex], ref formulas_data);
 
+                // Output found formulas count
                 formulas_found = formulas_data.GetLength(0);
 
                 foundFormulas.Text = "Formulas - " + String.Format("{0}", formulas_found) +
                                " record(s) found.";
 
+                // Clear formulat table
                 Formulas.Rows.Clear();
 
+                // Fill formulas table by new data
                 if (formulas_data.GetLength(0) > 0)
                 {
                     for (int i = 0; i < formulas_data.GetLength(0); i++)
@@ -159,10 +184,9 @@ namespace autopainter
                     }
                 }
 
+                // Clear selection
                 Formulas.ClearSelection();
             }
-        }
-
-                       
+        }                       
     }
 }

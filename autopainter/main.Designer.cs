@@ -156,7 +156,7 @@ namespace autopainter
             // 
             // butFind
             // 
-            this.butFind.Location = new System.Drawing.Point(943, 113);
+            this.butFind.Location = new System.Drawing.Point(1093, 113);
             this.butFind.Name = "butFind";
             this.butFind.Size = new System.Drawing.Size(75, 23);
             this.butFind.TabIndex = 3;
@@ -167,7 +167,7 @@ namespace autopainter
             // ManLabel
             // 
             this.ManLabel.AutoSize = true;
-            this.ManLabel.Location = new System.Drawing.Point(80, 116);
+            this.ManLabel.Location = new System.Drawing.Point(27, 116);
             this.ManLabel.Name = "ManLabel";
             this.ManLabel.Size = new System.Drawing.Size(70, 13);
             this.ManLabel.TabIndex = 6;
@@ -176,7 +176,7 @@ namespace autopainter
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(368, 116);
+            this.label1.Location = new System.Drawing.Point(315, 116);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 7;
@@ -185,7 +185,7 @@ namespace autopainter
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(644, 116);
+            this.label2.Location = new System.Drawing.Point(591, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 8;
@@ -310,7 +310,7 @@ namespace autopainter
             this.CCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.CCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.CCode.FormattingEnabled = true;
-            this.CCode.Location = new System.Drawing.Point(447, 112);
+            this.CCode.Location = new System.Drawing.Point(394, 112);
             this.CCode.Name = "CCode";
             this.CCode.Size = new System.Drawing.Size(168, 21);
             this.CCode.TabIndex = 12;
@@ -320,7 +320,7 @@ namespace autopainter
             this.Manufactur.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.Manufactur.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.Manufactur.FormattingEnabled = true;
-            this.Manufactur.Location = new System.Drawing.Point(156, 112);
+            this.Manufactur.Location = new System.Drawing.Point(103, 112);
             this.Manufactur.Name = "Manufactur";
             this.Manufactur.Size = new System.Drawing.Size(168, 21);
             this.Manufactur.TabIndex = 13;
@@ -330,7 +330,7 @@ namespace autopainter
             this.CName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.CName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.CName.FormattingEnabled = true;
-            this.CName.Location = new System.Drawing.Point(712, 112);
+            this.CName.Location = new System.Drawing.Point(659, 112);
             this.CName.Name = "CName";
             this.CName.Size = new System.Drawing.Size(168, 21);
             this.CName.TabIndex = 14;

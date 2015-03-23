@@ -56,7 +56,12 @@ public class CDBaccess
 
     private OleDbConnection connection;
 
-    public int open(string db_path, string db_filename, string db_passwd)
+    //---------------------------------------------------------------
+    //  DB connection open
+    //---------------------------------------------------------------
+    public int open(string db_path, 
+                    string db_filename, 
+                    string db_passwd)
     {
         int err_code = 0;
         connection.ConnectionString = "Provider=" +
@@ -83,13 +88,19 @@ public class CDBaccess
         return err_code;
     }
 
+    //---------------------------------------------------------------
+    //  DB connection close
+    //---------------------------------------------------------------
     public void close()
     {
         connection.Close();
     }
 
-    //
-    public void get_colors_data(TQueryData query_data, ref TColorsData[] colors_data)
+    //---------------------------------------------------------------
+    //  Get colors data from DB (colors find)
+    //---------------------------------------------------------------
+    public void get_colors_data(TQueryData query_data, 
+                                ref TColorsData[] colors_data)
     {
         string query = "SELECT ";
         string where = " WHERE";
@@ -165,8 +176,11 @@ public class CDBaccess
         }
     }
 
-    //
-    public void get_formulas_data(TColorsData colors_data, ref TFormulasData[] formulas_data)
+    //---------------------------------------------------------------
+    //  Get color's formula 
+    //---------------------------------------------------------------
+    public void get_formulas_data(TColorsData colors_data, 
+                                  ref TFormulasData[] formulas_data)
     {
         string query = "SELECT ";
         string where = " WHERE";
@@ -221,10 +235,12 @@ public class CDBaccess
         }
     }
 
+    //---------------------------------------------------------------
+    //  Get data for hints
+    //---------------------------------------------------------------
     public void get_hint_list(ref string[] hint_list, int field)
     {
         string query = "SELECT DISTINCT ";
-        string where = " WHERE";
         string field_name = "";
         string field_idx = "";
         string table_name = "";
@@ -257,9 +273,7 @@ public class CDBaccess
         }
 
         query += field_name;
-        query += " FROM " + table_name;
-
-        //query += where;
+        query += " FROM " + table_name;       
 
         OleDbCommand command = new OleDbCommand();
 
