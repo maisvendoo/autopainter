@@ -20,6 +20,10 @@ public class CDBaccess
         connection = new OleDbConnection();
     }
 
+    public const int FILED_MANUFACTOR = 0;
+    public const int FIELD_COLOR_CODE = 1;
+    public const int FILED_COLOR_NAME = 2;
+
     // Tables names
     private const string MODEL_DATA = "ModelColor";
     private const string CAR_FACTORY = "CarFactory";
@@ -213,6 +217,83 @@ public class CDBaccess
                 formulas_data[formulas_count - 1].FormulaCode = dr[FORMULA_CODE].ToString();
                 formulas_data[formulas_count - 1].StockCode = dr[STOCK_CODE].ToString();
                 formulas_data[formulas_count - 1].ColorIndex = dr[COLOR_INDEX].ToString();
+            }
+        }
+    }
+
+    public void get_hint_list(TQueryData query_data, ref string[] hint_list, int field)
+    {
+        string query = "SELECT ";
+        string where = " WHERE";
+        string field_name = "";
+        string field_idx = "";
+
+        switch (field)
+        {
+            case FILED_MANUFACTOR:
+                {
+                    field_name = CAR_FACTORY + "." + FACTORY_NAME;
+                    field_idx = FACTORY_NAME;
+
+                    where += String.Format(" {0}.{1} LIKE \'{2}%\'", CAR_FACTORY, FACTORY_NAME, query_data.Manufacturer); 
+
+                    if (query_data.ColorCode != "")
+                    {
+                        where += String.Format(" AND {0}.{1} = {2}", MODEL_DATA, COLOR_ID, query_data.ColorCode);
+                    }
+                    else
+                    {
+                        where += String.Format(" AND {0}.{1} LIKE \'%\'", MODEL_DATA, COLOR_ID);
+                    }
+
+                    if (query_data.ColorName != "")
+                    {
+                        where += String.Format(" AND {0}.{1} = {2}", MODEL_DATA, COLOR_NAME, query_data.ColorName);
+                    }
+                    else
+                    {
+                        where += String.Format(" AND {0}.{1} LIKE \'%\'", MODEL_DATA, COLOR_NAME);
+                    }
+
+                    break;
+                }
+
+            case FIELD_COLOR_CODE:
+                {
+                    field_name = MODEL_DATA + "." + COLOR_ID;
+                    break;
+                }
+
+            case FILED_COLOR_NAME:
+                {
+                    field_name = MODEL_DATA + "." + COLOR_NAME;
+                    break;
+                }
+        }
+
+        query += field_name;
+        query += " FROM " + MODEL_DATA + ", " + CAR_FACTORY;
+
+        query += where;
+
+        OleDbCommand command = new OleDbCommand();
+
+        command.Connection = connection;
+        command.CommandText = query;
+
+        OleDbDataReader dr = command.ExecuteReader();
+
+        int list_count = 0;
+
+        if (dr.HasRows)
+        {
+            while (dr.Read())
+            {
+                list_count++;
+
+                Array.Resize(ref hint_list, list_count);
+
+                hint_list[list_count - 1] = dr[field_idx].ToString();
             }
         }
     }

@@ -35,10 +35,7 @@ namespace autopainter
             this.ColorGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subscribe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CCode = new System.Windows.Forms.TextBox();
             this.butFind = new System.Windows.Forms.Button();
-            this.CName = new System.Windows.Forms.TextBox();
-            this.Manufactur = new System.Windows.Forms.TextBox();
             this.ManLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,6 +54,9 @@ namespace autopainter
             this.stcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColorIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.foundFormulas = new System.Windows.Forms.Label();
+            this.CCode = new System.Windows.Forms.ComboBox();
+            this.Manufactur = new System.Windows.Forms.ComboBox();
+            this.CName = new System.Windows.Forms.ComboBox();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Colors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Formulas)).BeginInit();
@@ -154,13 +154,6 @@ namespace autopainter
             this.subscribe.HeaderText = "";
             this.subscribe.Name = "subscribe";
             // 
-            // CCode
-            // 
-            this.CCode.Location = new System.Drawing.Point(442, 113);
-            this.CCode.Name = "CCode";
-            this.CCode.Size = new System.Drawing.Size(143, 20);
-            this.CCode.TabIndex = 2;
-            // 
             // butFind
             // 
             this.butFind.Location = new System.Drawing.Point(943, 113);
@@ -170,20 +163,6 @@ namespace autopainter
             this.butFind.Text = "Find";
             this.butFind.UseVisualStyleBackColor = true;
             this.butFind.Click += new System.EventHandler(this.butFind_Click);
-            // 
-            // CName
-            // 
-            this.CName.Location = new System.Drawing.Point(731, 113);
-            this.CName.Name = "CName";
-            this.CName.Size = new System.Drawing.Size(143, 20);
-            this.CName.TabIndex = 4;
-            // 
-            // Manufactur
-            // 
-            this.Manufactur.Location = new System.Drawing.Point(156, 113);
-            this.Manufactur.Name = "Manufactur";
-            this.Manufactur.Size = new System.Drawing.Size(143, 20);
-            this.Manufactur.TabIndex = 5;
             // 
             // ManLabel
             // 
@@ -326,21 +305,46 @@ namespace autopainter
             this.foundFormulas.TabIndex = 11;
             this.foundFormulas.Text = "found formulas";
             // 
+            // CCode
+            // 
+            this.CCode.FormattingEnabled = true;
+            this.CCode.Location = new System.Drawing.Point(447, 112);
+            this.CCode.Name = "CCode";
+            this.CCode.Size = new System.Drawing.Size(168, 21);
+            this.CCode.TabIndex = 12;
+            // 
+            // Manufactur
+            // 
+            this.Manufactur.FormattingEnabled = true;
+            this.Manufactur.Location = new System.Drawing.Point(156, 112);
+            this.Manufactur.Name = "Manufactur";
+            this.Manufactur.Size = new System.Drawing.Size(168, 21);
+            this.Manufactur.TabIndex = 13;
+            this.Manufactur.TextUpdate += new System.EventHandler(this.Manufactur_TextUpdate);
+            // 
+            // CName
+            // 
+            this.CName.FormattingEnabled = true;
+            this.CName.Location = new System.Drawing.Point(712, 112);
+            this.CName.Name = "CName";
+            this.CName.Size = new System.Drawing.Size(168, 21);
+            this.CName.TabIndex = 14;
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 753);
+            this.Controls.Add(this.CName);
+            this.Controls.Add(this.Manufactur);
+            this.Controls.Add(this.CCode);
             this.Controls.Add(this.foundFormulas);
             this.Controls.Add(this.Formulas);
             this.Controls.Add(this.foundColors);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ManLabel);
-            this.Controls.Add(this.Manufactur);
-            this.Controls.Add(this.CName);
             this.Controls.Add(this.butFind);
-            this.Controls.Add(this.CCode);
             this.Controls.Add(this.Colors);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
@@ -360,10 +364,7 @@ namespace autopainter
         private System.Windows.Forms.ToolStripMenuItem fileItem;
         private System.Windows.Forms.ToolStripMenuItem exitItem;
         private System.Windows.Forms.DataGridView Colors;
-        private System.Windows.Forms.TextBox CCode;
         private System.Windows.Forms.Button butFind;
-        private System.Windows.Forms.TextBox CName;
-        private System.Windows.Forms.TextBox Manufactur;
         private System.Windows.Forms.Label ManLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -388,7 +389,10 @@ namespace autopainter
         private System.Windows.Forms.DataGridViewTextBoxColumn FormulaCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn stcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColorIndex;
-        private System.Windows.Forms.Label foundFormulas;       
+        private System.Windows.Forms.Label foundFormulas;
+        private System.Windows.Forms.ComboBox CCode;
+        private System.Windows.Forms.ComboBox Manufactur;
+        private System.Windows.Forms.ComboBox CName;       
     }
 }
 

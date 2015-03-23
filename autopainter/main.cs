@@ -137,6 +137,29 @@ namespace autopainter
 
                 Formulas.ClearSelection();
             }
-        }       
+        }
+
+        private void Manufactur_TextUpdate(object sender, EventArgs e)
+        {
+            /*string[] hint_list = new string[0];
+
+            TQueryData query_data;
+
+            // Get data from text fields
+            query_data.Manufacturer = Manufactur.Text;
+            query_data.ColorCode = CCode.Text;
+            query_data.ColorName = CName.Text;
+
+            db.get_hint_list(query_data, ref hint_list, 0);
+
+            Manufactur.Items.Clear();
+
+            for (int i = 0; i < hint_list.GetLength(0); i++)
+                Manufactur.Items.Add(hint_list[i]);*/
+        }
+
+        
+
+        
     }
 }
